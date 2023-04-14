@@ -28,9 +28,46 @@ export const getUserFromLocalStorage = () => {
   return defaultUser;
 };
 
-export const getCountDownFromLocalStorage = (): number => {
+export const getQuestionsFromLocalStorage = () => {
+  const storedCountdown = localStorage.getItem('questions');
+  if (storedCountdown !== null) {
+    return JSON.parse(storedCountdown);
+  }
+  return [];
+};
+
+export const getCountdownFromLocalStorage = () => {
   const storedCountdown = localStorage.getItem('countdown');
-  const parsedCountdown = parseInt(storedCountdown as string);
-  const defaultCountdown = isNaN(parsedCountdown) ? storedCountdown : 60;
-  return defaultCountdown as number;
+  if (storedCountdown !== null) {
+    return parseInt(storedCountdown);
+  }
+  return 60;
+};
+
+export const getResultFromLocalStorage = () => {
+  const storedCountdown = localStorage.getItem('result');
+  if (storedCountdown !== null) {
+    return JSON.parse(storedCountdown);
+  }
+  return {
+    correct: 0,
+    wrong: 0,
+    unAnswered: 0,
+  };
+};
+
+export const getIndexFromLocalStorage = () => {
+  const storedCountdown = localStorage.getItem('index');
+  if (storedCountdown !== null) {
+    return parseInt(storedCountdown);
+  }
+  return 0;
+};
+
+export const clearLocalStorage = () => {
+  localStorage.removeItem('user');
+  localStorage.removeItem('countdown');
+  localStorage.removeItem('questions');
+  localStorage.removeItem('index');
+  localStorage.removeItem('result');
 };

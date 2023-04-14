@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { clearLocalStorage } from '../utils/helpers';
 
 interface LoginProps {
   setUser: React.Dispatch<React.SetStateAction<string>>;
@@ -15,6 +16,7 @@ export const Login = ({ setUser }: LoginProps) => {
   
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    clearLocalStorage();
     setUser(userInput);
     localStorage.setItem("user", userInput)
     navigate('/home')

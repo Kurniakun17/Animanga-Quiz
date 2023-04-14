@@ -3,14 +3,14 @@ import type * as I from '../utils/interfaces';
 
 interface QuizOptionsProps extends I.QuizAnswers {
   setQuestionIndex: React.Dispatch<React.SetStateAction<number>>;
-  setResult: React.Dispatch<React.SetStateAction<I.resultProps>>;
+  setQuizResult: React.Dispatch<React.SetStateAction<I.QuizResultProps>>;
   isEnded: () => void;
 }
 export const QuizOptions = ({
   incorrect_answers,
   correct_answer,
   setQuestionIndex,
-  setResult,
+  setQuizResult,
   isEnded,
 }: QuizOptionsProps) => {
   const answers = [...incorrect_answers, correct_answer].sort(
@@ -19,18 +19,29 @@ export const QuizOptions = ({
 
   const CheckAnswer = (answer: string) => {
     if (answer === correct_answer) {
-      setResult((prev) => ({ ...prev, correct: prev.correct + 1 }));
+      setQuizResult((prev) => {
+        const resultData = ({ ...prev, correct: prev.correct + 1 })
+        localStorage.setItem('result', JSON.stringify(resultData));
+        return resultData;
+      });
     } else {
-      setResult((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
+      setQuizResult((prev) => {
+        const resultData = { ...prev, wrong: prev.wrong + 1 };
+        localStorage.setItem('result', JSON.stringify(resultData));
+        return resultData;
+      });
     }
     isEnded();
-    setQuestionIndex((prev: number) => prev + 1);
+    setQuestionIndex((prev: number) => {
+      localStorage.setItem('index', `${prev + 1}`);
+      return prev + 1;
+    });
   };
 
   const option = (index: number, color: string) => {
     return (
       <button
-        className={`flex text-center items-center bg-${color}-500 rounded`}
+        className={`flex text-center items-center bg-${color}-500 rounded px-3`}
         onClick={() => {
           CheckAnswer(answers[index]);
         }}

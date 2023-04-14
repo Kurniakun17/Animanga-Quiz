@@ -10,7 +10,7 @@ export interface QuizQuestion extends QuizAnswers {
   type: string;
 }
 
-export interface resultProps{
+export interface QuizResultProps{
   correct: number;
   wrong: number;
   unAnswered: number;

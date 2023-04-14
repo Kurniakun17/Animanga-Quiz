@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   displayCountDown,
-  getCountDownFromLocalStorage,
+  getCountdownFromLocalStorage,
 } from '../utils/helpers';
 
 interface MiscbarProps {
@@ -11,7 +11,7 @@ interface MiscbarProps {
 
 export const Miscbar = ({ questionIndex, isTimeOut }: MiscbarProps) => {
   const [countdown, setCountdown] = useState<number>(
-    getCountDownFromLocalStorage()
+    getCountdownFromLocalStorage()
   );
 
   useEffect(() => {

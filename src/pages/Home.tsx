@@ -5,32 +5,44 @@ import { Miscbar } from '../components/Miscbar';
 import { Loading } from '../components/Loading';
 import { QuizOptions } from '../components/QuizOptions';
 import type * as I from '../utils/interfaces';
-import { fetchQuestion } from '../utils/helpers';
+import {
+  fetchQuestion,
+  getIndexFromLocalStorage,
+  getQuestionsFromLocalStorage,
+} from '../utils/helpers';
 import he from 'he';
 
 interface HomeProps {
   user: string;
   setUser: React.Dispatch<React.SetStateAction<string>>;
-  setResult: React.Dispatch<React.SetStateAction<I.resultProps>>;
+  setQuizResult: React.Dispatch<React.SetStateAction<I.QuizResultProps>>;
 }
 
-export const Home = ({ user, setUser, setResult }: HomeProps) => {
-  const [datas, setDatas] = useState<I.QuizQuestion[]>([]);
-  const [questionIndex, setQuestionIndex] = useState<number>(0);
+export const Home = ({ user, setUser, setQuizResult }: HomeProps) => {
+  const [datas, setDatas] = useState<I.QuizQuestion[]>(
+    getQuestionsFromLocalStorage()
+  );
+  const [questionIndex, setQuestionIndex] = useState<number>(
+    getIndexFromLocalStorage()
+  );
   const navigate = useNavigate();
+
+  useEffect(() => {
+    isLoggedIn();
+    if (datas.length === 0) {
+      void (async () => {
+        const responseData = await fetchQuestion();
+        setDatas(responseData);
+        localStorage.setItem('questions', JSON.stringify(responseData));
+      })();
+    }
+  }, []);
 
   const isLoggedIn = () => {
     if (user === '') {
       navigate('/');
     }
   };
-
-  useEffect(() => {
-    isLoggedIn();
-    void (async () => {
-      setDatas(await fetchQuestion());
-    })();
-  }, []);
 
   const isEnded = () => {
     if (questionIndex === 9) {
@@ -39,10 +51,12 @@ export const Home = ({ user, setUser, setResult }: HomeProps) => {
   };
 
   const isTimeOut = () => {
+    localStorage.removeItem('countdown');
     navigate('/result');
-  }
+  };
 
   if (datas.length === 0) {
+    console.log(datas);
     return <Loading></Loading>;
   }
 
@@ -60,7 +74,7 @@ export const Home = ({ user, setUser, setResult }: HomeProps) => {
       <QuizOptions
         {...datas[questionIndex]}
         setQuestionIndex={setQuestionIndex}
-        setResult={setResult}
+        setQuizResult={setQuizResult}
         isEnded={isEnded}
       ></QuizOptions>
     </div>
