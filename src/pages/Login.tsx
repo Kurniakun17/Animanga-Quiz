@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginProps {
   setUser: React.Dispatch<React.SetStateAction<string>>;
@@ -6,13 +7,16 @@ interface LoginProps {
 
 export const Login = ({ setUser }: LoginProps) => {
   const [userInput, setUserInput] = useState<string>('');
+  const navigate = useNavigate();
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
   };
+  
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setUser(userInput);
+    navigate('/home')
   };
 
   return (
@@ -34,9 +38,9 @@ export const Login = ({ setUser }: LoginProps) => {
           placeholder="username"
           required
         />
-        <button className="font-bold bg-[#00C8B4] rounded-md py-1 w-full">
-          Login
-        </button>
+          <button className="font-bold bg-[#00C8B4] rounded-md py-1 w-full">
+            Login
+          </button>
       </form>
     </div>
   );
