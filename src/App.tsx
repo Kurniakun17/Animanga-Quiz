@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="bg-[#080B15] min-h-screen text-white font-rubik">
       <Routes>
-        <Route path="/" element={<Login setUser={setUser}></Login>}></Route>
+        <Route path="/" element={<Login user={user} setUser={setUser}></Login>}></Route>
         <Route
           path="/home"
           element={

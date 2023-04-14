@@ -52,6 +52,10 @@ export const Home = ({ user, setUser, setQuizResult }: HomeProps) => {
 
   const isTimeOut = () => {
     localStorage.removeItem('countdown');
+    setQuizResult((prev) => {
+      const unAnswered = 10 - (prev.correct + prev.wrong);
+      return { ...prev, unAnswered };
+    });
     navigate('/result');
   };
 

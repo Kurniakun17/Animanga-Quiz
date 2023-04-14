@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { clearLocalStorage } from '../utils/helpers';
 
 interface LoginProps {
+  user: string
   setUser: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const Login = ({ setUser }: LoginProps) => {
+export const Login = ({ user, setUser }: LoginProps) => {
   const [userInput, setUserInput] = useState<string>('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(user !== ''){
+      navigate('/home')
+    }
+  }, [])
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
