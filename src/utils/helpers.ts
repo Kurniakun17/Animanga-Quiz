@@ -73,3 +73,11 @@ export const clearLocalStorage = () => {
   localStorage.removeItem('index');
   localStorage.removeItem('result');
 };
+
+
+export const colorVariants = {
+  cyan: 'bg-cyan-500',
+  yellow: 'bg-yellow-500',
+  red: 'bg-red-500',
+  green: 'bg-green-500',
+};

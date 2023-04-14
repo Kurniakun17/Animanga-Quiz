@@ -1,6 +1,6 @@
 import React from 'react';
 import type * as I from '../utils/interfaces';
-import { colors } from '../utils/helpers';
+import { colorVariants } from '../utils/helpers';
 
 interface QuizOptionsProps extends I.QuizAnswers {
   setQuestionIndex: React.Dispatch<React.SetStateAction<number>>;
@@ -39,68 +39,34 @@ export const QuizOptions = ({
     });
   };
 
-  const option = (index: number) => {
-    switch (index) {
-      case 0:
-        return (
-          <button
-            className={`flex text-center items-center bg-cyan-500 rounded px-3`}
-            onClick={() => {
-              CheckAnswer(answers[index]);
-            }}
-          >
-            <h3 className="w-full font-bold">{answers[index]}</h3>
-          </button>
-        );
-      case 1:
-        return (
-          <button
-            className={`flex text-center items-center bg-yellow-500 rounded px-3`}
-            onClick={() => {
-              CheckAnswer(answers[index]);
-            }}
-          >
-            <h3 className="w-full font-bold">{answers[index]}</h3>
-          </button>
-        );
-      case 2:
-        return (
-          <button
-            className={`flex text-center items-center bg-red-500 rounded px-3`}
-            onClick={() => {
-              CheckAnswer(answers[index]);
-            }}
-          >
-            <h3 className="w-full font-bold">{answers[index]}</h3>
-          </button>
-        );
-      case 3:
-        return (
-          <button
-            className={`flex text-center items-center bg-green-500 rounded px-3`}
-            onClick={() => {
-              CheckAnswer(answers[index]);
-            }}
-          >
-            <h3 className="w-full font-bold">{answers[index]}</h3>
-          </button>
-        );
-    }
+  const option = (index: number, color: keyof typeof colorVariants) => {
+    return (
+      <>
+        <button
+          className={`flex text-center items-center ${colorVariants[color]} rounded px-3`}
+          onClick={() => {
+            CheckAnswer(answers[index]);
+          }}
+        >
+          <h3 className="w-full font-bold">{answers[index]}</h3>
+        </button>
+      </>
+    );
   };
 
   return (
     <div className="grid grid-cols-2 w-[90%] mt-24 h-[30vh] m-auto gap-3">
       {answers.length === 2 ? (
         <>
-          {option(0)}
-          {option(1)}
+          {option(0, 'cyan')}
+          {option(1, 'yellow')}
         </>
       ) : (
         <>
-          {option(0)}
-          {option(1)}
-          {option(2)}
-          {option(3)}
+          {option(0, 'cyan')}
+          {option(1, 'yellow')}
+          {option(2, 'red')}
+          {option(3, 'green')}
         </>
       )}
     </div>
