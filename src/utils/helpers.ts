@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+export const colors = ['cyan', 'yellow', 'red', 'green']
+
 export const fetchQuestion = async () => {
   try {
     const response = await axios.get(

@@ -66,7 +66,7 @@ export const Home = ({ user, setUser, setQuizResult }: HomeProps) => {
 
   return (
     <div>
-      <Navbar user={user} setUser={setUser} />
+      <Navbar user={user} setUser={setUser} setQuizResult={setQuizResult}/>
       <div className="flex flex-col gap-4 w-[80%] max-w-[800px] m-auto">
         <Miscbar questionIndex={questionIndex} isTimeOut={isTimeOut}></Miscbar>
         <div className="flex items-center text-center bg-[#2D3346] h-[25vh] rounded-lg px-4">
