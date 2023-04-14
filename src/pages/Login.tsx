@@ -16,6 +16,7 @@ export const Login = ({ setUser }: LoginProps) => {
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setUser(userInput);
+    localStorage.setItem("user", userInput)
     navigate('/home')
   };
 

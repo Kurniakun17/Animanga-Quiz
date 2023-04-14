@@ -6,7 +6,6 @@ interface QuizOptionsProps extends I.QuizAnswers {
   setResult: React.Dispatch<React.SetStateAction<I.resultProps>>;
   isEnded: () => void;
 }
-
 export const QuizOptions = ({
   incorrect_answers,
   correct_answer,
