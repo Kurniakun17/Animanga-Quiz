@@ -61,7 +61,7 @@ export const QuizOptions = ({
 
   return (
     <div
-      className={`absolute bottom-8 left-0 right-0 grid grid-cols-2 xl:${
+      className={`absolute bottom-2 xl:bottom-8 left-0 right-0 grid grid-cols-2 xl:${
         answers.length === 2 ? 'grid-cols-2' : 'grid-cols-4'
       } w-[90%] h-[30vh] m-auto gap-3`}
     >

@@ -19,7 +19,7 @@ function App() {
   );
 
   return (
-    <div className="bg-[#080B15] min-h-screen text-white font-rubik">
+    <div className="bg-[#080B15] h-screen text-white font-rubik">
       <Routes>
         <Route
           path="/"
