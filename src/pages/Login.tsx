@@ -36,7 +36,7 @@ export const Login = ({ user, setUser, setQuizResult }: LoginProps) => {
   return (
     <div className="flex flex-col h-screen items-center justify-center">
       <h1 className="font-bold mb-8 text-4xl text-[#00C8B4]">
-        Quiz<span className="text-white">ify</span>
+        Quiz<span className="text-white">ifyyy</span>
       </h1>
       <form
         className="flex flex-col bg-[#13192A] gap-6 text-center px-6 py-9 rounded-lg border-b-4 border-b-[#00C8B4] w-[70%] max-w-[300px]"

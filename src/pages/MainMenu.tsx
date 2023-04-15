@@ -42,7 +42,7 @@ export const MainMenu = ({ user, setUser, setQuizResult }: MainMenuProps) => {
       ></Navbar>
       <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] justify-center items-center w-[70%] max-w-[400px]">
         <h1 className="font-bold mb-8 text-4xl text-[#00C8B4] text-center">
-          Quiz<span className="text-white">ify</span>
+          Quiz<span className="text-white">ifyyy</span>
         </h1>
         <div className="flex flex-col gap-4 max-w-[300px] m-auto">
           <button
