@@ -8,20 +8,13 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: 'tsconfig.json',
+    project: './tsconfig.json',
   },
   plugins: ['react'],
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
-    '@typescript-eslint/naming-convention': [
-      'error',
-      {
-        selector: 'variableLike',
-        format: ['camelCase', 'PascalCase', 'UPPER_CASE', 'snake_case'],
-      },
-    ],
     '@typescript-eslint/consistent-type-assertions': [
       'error',
       {
@@ -29,5 +22,10 @@ module.exports = {
         objectLiteralTypeAssertions: 'allow',
       },
     ],
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
 };

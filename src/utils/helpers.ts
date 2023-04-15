@@ -1,6 +1,7 @@
 import axios from 'axios';
+import type * as I from './interfaces';
 
-export const colors = ['cyan', 'yellow', 'red', 'green']
+export const colors = ['cyan', 'yellow', 'red', 'green'];
 
 export const fetchQuestion = async () => {
   try {
@@ -24,60 +25,27 @@ export const displayCountDown = (countDown: number) => {
   }
 };
 
-export const getUserFromLocalStorage = () => {
-  const storedUser = localStorage.getItem('user');
-  const defaultUser = storedUser != null ? storedUser : '';
-  return defaultUser;
+export const shuffleArray = (array: string[]) => {
+  return array.sort(() => Math.random() - 0.4);
 };
 
-export const getQuestionsFromLocalStorage = () => {
-  const storedCountdown = localStorage.getItem('questions');
-  if (storedCountdown !== null) {
-    return JSON.parse(storedCountdown);
-  }
-  return [];
+export const colorVariants = {
+  cyan: 'bg-cyan-500 hover:bg-cyan-600 border-b-8 border-b-cyan-700',
+  yellow: 'bg-yellow-500 hover:bg-yellow-600 border-b-8 border-b-yellow-700',
+  red: 'bg-red-500 hover:bg-red-600 border-b-8 border-b-red-700',
+  green: 'bg-green-500 hover:bg-green-600 border-b-8 border-b-green-700',
 };
 
-export const getCountdownFromLocalStorage = () => {
-  const storedCountdown = localStorage.getItem('countdown');
-  if (storedCountdown !== null) {
-    return parseInt(storedCountdown);
-  }
-  return 60;
-};
-
-export const getResultFromLocalStorage = () => {
-  const storedCountdown = localStorage.getItem('result');
-  if (storedCountdown !== null) {
-    return JSON.parse(storedCountdown);
-  }
-  return {
+export const resetQuizResult = (
+  setQuizResult: React.Dispatch<React.SetStateAction<I.QuizResultProps>>
+) => {
+  setQuizResult({
     correct: 0,
     wrong: 0,
     unAnswered: 0,
-  };
+  });
 };
 
-export const getIndexFromLocalStorage = () => {
-  const storedCountdown = localStorage.getItem('index');
-  if (storedCountdown !== null) {
-    return parseInt(storedCountdown);
-  }
-  return 0;
-};
-
-export const clearLocalStorage = () => {
-  localStorage.removeItem('user');
-  localStorage.removeItem('countdown');
-  localStorage.removeItem('questions');
-  localStorage.removeItem('index');
-  localStorage.removeItem('result');
-};
-
-
-export const colorVariants = {
-  cyan: 'bg-cyan-500',
-  yellow: 'bg-yellow-500',
-  red: 'bg-red-500',
-  green: 'bg-green-500',
+export const getColorVariant = (color: keyof typeof colorVariants) => {
+  return colorVariants[color];
 };

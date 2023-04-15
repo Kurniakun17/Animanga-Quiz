@@ -1,36 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { clearLocalStorage } from '../utils/helpers';
+import { resetQuizResult } from '../utils/helpers';
+import { clearLocalStorage } from '../utils/localStorageUtils';
+import type * as I from '../utils/interfaces';
 
 interface LoginProps {
-  user: string
+  user: string;
   setUser: React.Dispatch<React.SetStateAction<string>>;
+  setQuizResult: React.Dispatch<React.SetStateAction<I.QuizResultProps>>;
 }
 
-export const Login = ({ user, setUser }: LoginProps) => {
+export const Login = ({ user, setUser, setQuizResult }: LoginProps) => {
   const [userInput, setUserInput] = useState<string>('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(user !== ''){
-      navigate('/home')
+    if (user !== '') {
+      navigate('/home');
     }
-  }, [])
+  }, []);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
   };
-  
+
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     clearLocalStorage();
     setUser(userInput);
-    localStorage.setItem("user", userInput)
-    navigate('/home')
+    resetQuizResult(setQuizResult);
+    localStorage.setItem('user', userInput);
+    navigate('/home');
   };
 
   return (
     <div className="flex flex-col h-screen items-center justify-center">
+      <h1 className="font-bold mb-8 text-4xl text-[#00C8B4]">
+        Quiz<span className="text-white">ify</span>
+      </h1>
       <form
         className="flex flex-col bg-[#13192A] gap-6 text-center px-6 py-9 rounded-lg border-b-4 border-b-[#00C8B4] w-[70%] max-w-[300px]"
         onSubmit={(e) => {
@@ -48,9 +55,9 @@ export const Login = ({ user, setUser }: LoginProps) => {
           placeholder="username"
           required
         />
-          <button className="font-bold bg-[#00C8B4] rounded-md py-1 w-full">
-            Login
-          </button>
+        <button className="font-bold bg-[#00C8B4] rounded-md py-1 w-full">
+          Login
+        </button>
       </form>
     </div>
   );

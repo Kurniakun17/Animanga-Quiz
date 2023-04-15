@@ -8,7 +8,7 @@ export default {
     extend: {
       fontFamily:{
         rubik: ['Rubik', 'sans-serif']
-      }
+      },
     }
   },
   plugins: []

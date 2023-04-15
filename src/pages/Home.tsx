@@ -5,11 +5,11 @@ import { Miscbar } from '../components/Miscbar';
 import { Loading } from '../components/Loading';
 import { QuizOptions } from '../components/QuizOptions';
 import type * as I from '../utils/interfaces';
+import { fetchQuestion } from '../utils/helpers';
 import {
-  fetchQuestion,
   getIndexFromLocalStorage,
   getQuestionsFromLocalStorage,
-} from '../utils/helpers';
+} from '../utils/localStorageUtils';
 import he from 'he';
 
 interface HomeProps {
@@ -66,11 +66,11 @@ export const Home = ({ user, setUser, setQuizResult }: HomeProps) => {
 
   return (
     <div>
-      <Navbar user={user} setUser={setUser} setQuizResult={setQuizResult}/>
+      <Navbar user={user} setUser={setUser} setQuizResult={setQuizResult} />
       <div className="flex flex-col gap-4 w-[80%] max-w-[800px] m-auto">
         <Miscbar questionIndex={questionIndex} isTimeOut={isTimeOut}></Miscbar>
-        <div className="flex items-center text-center bg-[#2D3346] h-[25vh] rounded-lg px-4">
-          <h3 className="w-full font-bold">
+        <div className="flex items-center text-center bg-[#2D3346] h-[25vh] rounded-lg px-8">
+          <h3 className="w-full font-bold xl:text-lg">
             {he.decode(datas[questionIndex].question)}
           </h3>
         </div>

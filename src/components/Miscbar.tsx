@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {
-  displayCountDown,
-  getCountdownFromLocalStorage,
-} from '../utils/helpers';
+import { displayCountDown } from '../utils/helpers';
+import { getCountdownFromLocalStorage } from '../utils/localStorageUtils';
 
 interface MiscbarProps {
   questionIndex: number;
@@ -27,8 +25,6 @@ export const Miscbar = ({ questionIndex, isTimeOut }: MiscbarProps) => {
       clearInterval(timer);
     };
   });
-
-  console.log(countdown);
 
   return (
     <div className="flex justify-between mt-16 w-full bg-[#2D3346] rounded-lg py-2 px-4 lg:py-3 text-[16px] ">

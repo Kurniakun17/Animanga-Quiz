@@ -1,6 +1,11 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import React from 'react';
 import type * as I from '../utils/interfaces';
-import { colorVariants } from '../utils/helpers';
+import {
+  getColorVariant,
+  type colorVariants,
+  shuffleArray,
+} from '../utils/helpers';
 
 interface QuizOptionsProps extends I.QuizAnswers {
   setQuestionIndex: React.Dispatch<React.SetStateAction<number>>;
@@ -14,9 +19,7 @@ export const QuizOptions = ({
   setQuizResult,
   isEnded,
 }: QuizOptionsProps) => {
-  const answers = [...incorrect_answers, correct_answer].sort(
-    () => Math.random() - 0.4
-  );
+  const answers = shuffleArray([...incorrect_answers, correct_answer]);
 
   const CheckAnswer = (answer: string) => {
     if (answer === correct_answer) {
@@ -43,7 +46,9 @@ export const QuizOptions = ({
     return (
       <>
         <button
-          className={`flex text-center items-center ${colorVariants[color]} rounded px-3`}
+          className={`flex text-center items-center ${getColorVariant(
+            color
+          )} rounded-xl rounded-b-xl px-3 active:translate-y-1 w-full`}
           onClick={() => {
             CheckAnswer(answers[index]);
           }}
@@ -55,7 +60,11 @@ export const QuizOptions = ({
   };
 
   return (
-    <div className="grid grid-cols-2 w-[90%] mt-24 h-[30vh] m-auto gap-3">
+    <div
+      className={`absolute bottom-8 left-0 right-0 grid grid-cols-2 xl:${
+        answers.length === 2 ? 'grid-cols-2' : 'grid-cols-4'
+      } w-[90%] h-[30vh] m-auto gap-3`}
+    >
       {answers.length === 2 ? (
         <>
           {option(0, 'cyan')}

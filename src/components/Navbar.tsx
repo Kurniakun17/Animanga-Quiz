@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { clearLocalStorage } from '../utils/helpers';
-import type * as I from '../utils/interfaces'
+import { clearLocalStorage } from '../utils/localStorageUtils';
+import type * as I from '../utils/interfaces';
+import { resetQuizResult } from '../utils/helpers';
 
 interface NavbarProps {
   user: string;
@@ -15,11 +16,7 @@ export const Navbar = ({ user, setUser, setQuizResult }: NavbarProps) => {
     clearLocalStorage();
     setUser('');
     navigate('/');
-    setQuizResult({
-      correct: 0,
-      wrong: 0,
-      unAnswered: 0,
-    });
+    resetQuizResult(setQuizResult);
   };
 
   return (
