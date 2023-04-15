@@ -21,9 +21,9 @@ export const Navbar = ({ user, setUser, setQuizResult }: NavbarProps) => {
 
   return (
     <div className="w-full p-4 px-0 bg-[#2D3346] font-bold">
-      <div className="flex justify-between w-[90%] m-auto">
+      <div className="flex justify-between items-center w-[90%] m-auto">
         <h2 className="">Hai, {user}</h2>
-        <button className="" onClick={onLogoutHandler}>
+        <button className="px-3 py-1 bg-red-600 rounded-lg" onClick={onLogoutHandler}>
           Logout
         </button>
       </div>

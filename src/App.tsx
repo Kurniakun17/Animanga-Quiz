@@ -49,7 +49,7 @@ function App() {
             ></Result>
           }
         ></Route>
-        <Route path='/main-menu' element={<MainMenu></MainMenu>}>
+        <Route path='/main-menu' element={<MainMenu user={user} setUser={setUser} setQuizResult={setQuizResult}></MainMenu>}>
         </Route>
       </Routes>
     </div>

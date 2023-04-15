@@ -5,7 +5,7 @@ import { Miscbar } from '../components/Miscbar';
 import { Loading } from '../components/Loading';
 import { QuizOptions } from '../components/QuizOptions';
 import type * as I from '../utils/interfaces';
-import { fetchQuestion } from '../utils/helpers';
+import { fetchQuestion, isLoggedIn } from '../utils/helpers';
 import {
   getIndexFromLocalStorage,
   getQuestionsFromLocalStorage,
@@ -28,7 +28,7 @@ export const Home = ({ user, setUser, setQuizResult }: HomeProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    isLoggedIn();
+    isLoggedIn(user, navigate);
     if (datas.length === 0) {
       void (async () => {
         const responseData = await fetchQuestion();
@@ -37,12 +37,6 @@ export const Home = ({ user, setUser, setQuizResult }: HomeProps) => {
       })();
     }
   }, []);
-
-  const isLoggedIn = () => {
-    if (user === '') {
-      navigate('/');
-    }
-  };
 
   const isEnded = () => {
     if (questionIndex === 9) {

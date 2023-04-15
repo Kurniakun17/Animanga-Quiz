@@ -1,5 +1,6 @@
 import axios from 'axios';
 import type * as I from './interfaces';
+import { type NavigateFunction } from 'react-router';
 
 export const colors = ['cyan', 'yellow', 'red', 'green'];
 
@@ -12,6 +13,12 @@ export const fetchQuestion = async () => {
     return data;
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const isLoggedIn = (user: string, navigate: NavigateFunction) => {
+  if (user === '') {
+    navigate('/');
   }
 };
 

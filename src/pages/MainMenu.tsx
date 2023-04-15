@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar } from '../components/Navbar';
 import type * as I from '../utils/interfaces';
+import { useNavigate } from 'react-router';
+import { isLoggedIn } from '../utils/helpers';
+import { getQuestionsFromLocalStorage } from '../utils/localStorageUtils';
 
 interface MainMenuProps {
   user: string;
@@ -9,6 +12,19 @@ interface MainMenuProps {
 }
 
 export const MainMenu = ({ user, setUser, setQuizResult }: MainMenuProps) => {
+  const [isPaused, setIsPaused] = useState(
+    getQuestionsFromLocalStorage().length > 1
+  );
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    isLoggedIn(user, navigate);
+  }, []);
+
+  const onPlayHandler = () => {
+    navigate('/home');
+  };
+
   return (
     <>
       <Navbar
@@ -16,16 +32,21 @@ export const MainMenu = ({ user, setUser, setQuizResult }: MainMenuProps) => {
         setUser={setUser}
         setQuizResult={setQuizResult}
       ></Navbar>
-      <div className="h-screen justify-center items-center">
-        <h1 className="font-bold mb-8 text-4xl text-[#00C8B4]">
+      <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] justify-center items-center w-[70%] max-w-[400px]">
+        <h1 className="font-bold mb-8 text-4xl text-[#00C8B4] text-center">
           Quiz<span className="text-white">ify</span>
         </h1>
-        <div className="flex flex-col gap-4 w-[70%] max-w-[300px] m-auto">
-          <button className="py-4 w-full bg-green-500 rounded-xl">Play</button>
-          <button className="py-4 w-full bg-green-500 rounded-xl">
+        <div className="flex flex-col gap-4 max-w-[300px] m-auto">
+          <button
+            className="py-3 w-full bg-green-500 rounded-xl"
+            onClick={onPlayHandler}
+          >
+            {isPaused? 'Resume':'Play'}
+          </button>
+          <button className="py-3 w-full bg-green-500 rounded-xl">
             High Score
           </button>
-          <button className="py-4 w-full bg-green-500 rounded-xl">About</button>
+          <button className="py-3 w-full bg-green-500 rounded-xl">About</button>
         </div>
       </div>
     </>

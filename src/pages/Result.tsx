@@ -27,10 +27,10 @@ export const Result = ({
     }
   };
 
-  const onPlayAgainHandler = () => {
+  const onButtonHandler = (clicked: string) => {
     clearLocalStorage(true);
     resetQuizResult(setQuizResult);
-    navigate('/home');
+    clicked === 'play again' ? navigate('/home') : navigate('/main-menu');
   };
 
   return (
@@ -40,11 +40,22 @@ export const Result = ({
           <h2 className="text-[#00C8B4] font-bold">{`Correct ${quizResult.correct}`}</h2>
           <h2 className="text-red-500 font-bold">{`Wrong ${quizResult.wrong}`}</h2>
           <h2 className="text-gray-300 font-bold">{`Unanswered ${quizResult.unAnswered}`}</h2>
+          <div className="flex "></div>
           <button
             className="font-bold bg-[#00C8B4] rounded-md w-full py-2"
-            onClick={onPlayAgainHandler}
+            onClick={() => {
+              onButtonHandler('play again');
+            }}
           >
             Play Again
+          </button>
+          <button
+            className="font-bold bg-[#00C8B4] rounded-md w-full py-2"
+            onClick={() => {
+              onButtonHandler('main menu');
+            }}
+          >
+            Go to Main Menu
           </button>
         </div>
       </div>

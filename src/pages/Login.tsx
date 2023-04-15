@@ -30,7 +30,7 @@ export const Login = ({ user, setUser, setQuizResult }: LoginProps) => {
     setUser(userInput);
     resetQuizResult(setQuizResult);
     localStorage.setItem('user', userInput);
-    navigate('/home');
+    navigate('/main-menu');
   };
 
   return (
