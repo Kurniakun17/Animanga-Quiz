@@ -40,6 +40,15 @@ export const getIndexFromLocalStorage = () => {
   return 0;
 };
 
+export const getHighScoreFromLocalStorage = () => {
+  const storedCountdown = localStorage.getItem('highscore');
+  if (storedCountdown !== null) {
+    return JSON.parse(storedCountdown);
+  }
+  return [];
+};
+
+
 export const clearLocalStorage = (keepUser: boolean = false) => {
   if (!keepUser) {
     localStorage.removeItem('user');

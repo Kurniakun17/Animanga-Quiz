@@ -54,7 +54,6 @@ export const Home = ({ user, setUser, setQuizResult }: HomeProps) => {
   };
 
   if (datas.length === 0) {
-    console.log(datas);
     return <Loading></Loading>;
   }
 

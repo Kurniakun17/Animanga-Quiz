@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Navbar } from '../components/Navbar';
 import type * as I from '../utils/interfaces';
 import { useNavigate } from 'react-router';
@@ -12,7 +12,7 @@ interface MainMenuProps {
 }
 
 export const MainMenu = ({ user, setUser, setQuizResult }: MainMenuProps) => {
-  const [isPaused, setIsPaused] = useState(
+  const isPausedRef = useRef<boolean>(
     getQuestionsFromLocalStorage().length > 1
   );
   const navigate = useNavigate();
@@ -23,6 +23,14 @@ export const MainMenu = ({ user, setUser, setQuizResult }: MainMenuProps) => {
 
   const onPlayHandler = () => {
     navigate('/home');
+  };
+
+  const onHighScoreHandler = () => {
+    navigate('/high-score');
+  };
+
+  const onAboutHandler = () => {
+    navigate('/about');
   };
 
   return (
@@ -38,15 +46,23 @@ export const MainMenu = ({ user, setUser, setQuizResult }: MainMenuProps) => {
         </h1>
         <div className="flex flex-col gap-4 max-w-[300px] m-auto">
           <button
-            className="py-3 w-full bg-green-500 rounded-xl"
+            className="py-3 w-full bg-blue-500 rounded-xl rounded-b-xl font-bold border-b-[6px] border-b-blue-600 active:translate-y-1"
             onClick={onPlayHandler}
           >
-            {isPaused? 'Resume':'Play'}
+            {isPausedRef.current ? 'Resume' : 'Play'}
           </button>
-          <button className="py-3 w-full bg-green-500 rounded-xl">
+          <button
+            className="py-3 w-full bg-blue-600 rounded-xl  rounded-b-xl font-bold border-b-[6px] border-b-blue-700 active:translate-y-1"
+            onClick={onHighScoreHandler}
+          >
             High Score
           </button>
-          <button className="py-3 w-full bg-green-500 rounded-xl">About</button>
+          <button
+            className="py-3 w-full bg-blue-700 rounded-xl rounded-b-xl font-bold border-b-[6px] border-b-blue-800 active:translate-y-1"
+            onClick={onAboutHandler}
+          >
+            About
+          </button>
         </div>
       </div>
     </>

@@ -9,6 +9,8 @@ import {
   getResultFromLocalStorage,
   getUserFromLocalStorage,
 } from './utils/localStorageUtils';
+import { HighScore } from './pages/HighScore';
+import { About } from './pages/About';
 
 function App() {
   const [user, setUser] = useState<string>(() => getUserFromLocalStorage());
@@ -51,6 +53,8 @@ function App() {
         ></Route>
         <Route path='/main-menu' element={<MainMenu user={user} setUser={setUser} setQuizResult={setQuizResult}></MainMenu>}>
         </Route>
+        <Route path='/high-score' element={<HighScore></HighScore>}></Route>
+        <Route path='/about' element={<About></About>}></Route>
       </Routes>
     </div>
   );

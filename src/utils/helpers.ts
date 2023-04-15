@@ -36,6 +36,11 @@ export const shuffleArray = (array: string[]) => {
   return array.sort(() => Math.random() - 0.4);
 };
 
+export const generateDate = () => {
+  const date = new Date();
+  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+}
+
 export const colorVariants = {
   cyan: 'bg-cyan-500 hover:bg-cyan-600 border-b-8 border-b-cyan-700',
   yellow: 'bg-yellow-500 hover:bg-yellow-600 border-b-8 border-b-yellow-700',

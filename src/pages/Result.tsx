@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import type * as I from '../utils/interfaces';
 import { useNavigate } from 'react-router-dom';
-import { clearLocalStorage } from '../utils/localStorageUtils';
-import { resetQuizResult } from '../utils/helpers';
+import {
+  clearLocalStorage,
+  getHighScoreFromLocalStorage,
+} from '../utils/localStorageUtils';
+import { generateDate, resetQuizResult } from '../utils/helpers';
 
 interface ResultComponentProps {
   user: string;
@@ -30,6 +33,14 @@ export const Result = ({
   const onButtonHandler = (clicked: string) => {
     clearLocalStorage(true);
     resetQuizResult(setQuizResult);
+    const currentScore = {
+      ...quizResult,
+      score: quizResult.correct * 10,
+      date: generateDate(),
+    };
+    let HighScore = getHighScoreFromLocalStorage();
+    HighScore = [...HighScore, currentScore];
+    localStorage.setItem('highscore', JSON.stringify(HighScore));
     clicked === 'play again' ? navigate('/home') : navigate('/main-menu');
   };
 
