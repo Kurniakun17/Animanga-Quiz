@@ -41,17 +41,21 @@ export const Result = ({
     let HighScore = getHighScoreFromLocalStorage();
     HighScore = [...HighScore, currentScore];
     localStorage.setItem('highscore', JSON.stringify(HighScore));
-    clicked === 'play again' ? navigate('/home') : navigate('/main-menu');
+    clicked === 'play again' ? navigate('/play') : navigate('/main-menu');
   };
 
   return (
     <>
       <div className="flex h-screen justify-center items-center">
         <div className="flex flex-col bg-[#13192A] gap-6 text-center px-6 py-9 rounded-lg border-t-4 border-t-[#00C8B4] w-[70%] max-w-[300px]">
-          <h2 className="text-[#00C8B4] font-bold">{`Correct ${quizResult.correct}`}</h2>
-          <h2 className="text-red-500 font-bold">{`Wrong ${quizResult.wrong}`}</h2>
-          <h2 className="text-gray-300 font-bold">{`Unanswered ${quizResult.unAnswered}`}</h2>
-          <div className="flex "></div>
+          <h1 className="text-xl font-bold">
+            Score: {quizResult.correct * 10}/100
+          </h1>
+          <div className="flex flex-col gap-2">
+            <h2 className="text-[#00C8B4]">{`Correct ${quizResult.correct}`}</h2>
+            <h2 className="text-red-500">{`Wrong ${quizResult.wrong}`}</h2>
+            <h2 className="text-gray-300">{`Unanswered ${quizResult.unAnswered}`}</h2>
+          </div>
           <button
             className="font-bold bg-[#00C8B4] rounded-md w-full py-2"
             onClick={() => {

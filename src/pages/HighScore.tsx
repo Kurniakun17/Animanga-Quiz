@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { getHighScoreFromLocalStorage } from '../utils/localStorageUtils';
 import { type QuizResultProps } from '../utils/interfaces';
@@ -10,57 +10,84 @@ interface HighScoreProps extends QuizResultProps {
 
 export const HighScore = () => {
   const navigate = useNavigate();
-  const highScoreRef = useRef<[] | HighScoreProps[]>(
+  const [highScore, setHighScore] = useState<[] | HighScoreProps[]>(
     getHighScoreFromLocalStorage()
   );
-
   const onBackHandler = () => {
     navigate('/main-menu');
   };
 
+  const onResetHandler = () => {
+    localStorage.removeItem('highscore');
+    setHighScore([]);
+  };
+
   return (
     <div className="h-screen flex justify-center items-center">
-      <div className="w-[90%] max-w-[800px] flex flex-col px-6 py-6 bg-gray-700 gap-2 rounded-md">
-        <button
-          className="self-start px-3 py-1 border-solid border-2 border-sky-500 rounded-xl"
-          onClick={onBackHandler}
-        >
-          Back
-        </button>
-        <h1 className="text-1xl font-bold text-center mb-2 text-[#00C8B4]">
+      <div className="w-[90%] max-w-[800px] flex flex-col gap-2 rounded-md">
+        <div className="flex justify-between">
+          <button
+            className="px-3 md:text-lg pr-3.5 py-1 bg-[#2d3446] rounded-lg font-bold"
+            onClick={onBackHandler}
+          >
+            {'<'}
+          </button>
+          <button
+            className="px-3 md:text-md pr-3.5 py-1 bg-yellow-600 rounded-lg font-bold"
+            onClick={onResetHandler}
+          >
+            Reset
+          </button>
+        </div>
+        <h1 className="text-2xl lg:text-3xl font-bold text-center mb-4 text-[#00C8B4]">
           High Score
         </h1>
-        {highScoreRef.current.length === 0 ? (
-          <h1 className="font-bold text-center text-3xl my-4">No History</h1>
+        {highScore.length === 0 ? (
+          <h1 className="font-bold text-center text-3xl my-4 bg-[#2d3346] p-3 rounded-lg">
+            No History!
+          </h1>
         ) : (
-          <table className="border-solid border-2 border-slate-500 w-full text-center table-fixed">
-            <thead className="rounded-lg">
-              <tr>
-                <th className="p-2 bg-gray-500 text-xs">Date</th>
-                <th className="p-2 bg-gray-500 text-xs">Correct</th>
-                <th className="p-2 bg-gray-500 text-xs">Wrong</th>
-                <th className="p-2 bg-gray-500 text-xs">Unanswered</th>
-                <th className="p-2 bg-gray-500 text-xs">Scores</th>
-              </tr>
-            </thead>
-            <tbody>
-              {highScoreRef.current
-                .sort(
-                  (a: HighScoreProps, b: HighScoreProps) => b.score - a.score
-                )
-                .map((data: HighScoreProps, index: number) => {
-                  return (
-                    <tr key={`highscore-${index}`}>
-                      <td className="p-2 text-[10px]">{data.date}</td>
-                      <td className="p-2 text-[10px]">{data.correct}</td>
-                      <td className="p-2 text-[10px]">{data.wrong}</td>
-                      <td className="p-2 text-[10px]">{data.unAnswered}</td>
-                      <td className="p-2 text-[10px]">{data.score}</td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+          <div className="rounded-lg overflow-auto">
+            <table className=" w-full text-center">
+              <thead>
+                <tr className="bg-[#2d3346]">
+                  <th className="p-3 text-xs md:text-base">Date</th>
+                  <th className="p-3 text-xs md:text-base">Correct</th>
+                  <th className="p-3 text-xs md:text-base">Wrong</th>
+                  <th className="p-3 text-xs md:text-base">Unanswered</th>
+                  <th className="p-3 text-xs md:text-base">Scores</th>
+                </tr>
+              </thead>
+              <tbody>
+                {highScore
+                  .sort(
+                    (a: HighScoreProps, b: HighScoreProps) => b.score - a.score
+                  )
+                  .slice(0, 10)
+                  .map((data: HighScoreProps, index: number) => {
+                    return (
+                      <tr key={`highscore-${index}`}>
+                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
+                          {data.date}
+                        </td>
+                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
+                          {data.correct}
+                        </td>
+                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
+                          {data.wrong}
+                        </td>
+                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
+                          {data.unAnswered}
+                        </td>
+                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
+                          {data.score}
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

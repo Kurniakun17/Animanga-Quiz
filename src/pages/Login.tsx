@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { resetQuizResult } from '../utils/helpers';
+import { isLoggedIn, resetQuizResult } from '../utils/helpers';
 import { clearLocalStorage } from '../utils/localStorageUtils';
 import type * as I from '../utils/interfaces';
 
@@ -15,9 +15,7 @@ export const Login = ({ user, setUser, setQuizResult }: LoginProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user !== '') {
-      navigate('/home');
-    }
+    isLoggedIn(user, navigate);
   }, []);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,17 +34,19 @@ export const Login = ({ user, setUser, setQuizResult }: LoginProps) => {
   return (
     <div className="flex flex-col h-screen items-center justify-center">
       <h1 className="font-bold mb-8 text-4xl text-[#00C8B4]">
-        Quiz<span className="text-white">ifyyy</span>
+        Quiz<span className="text-[#2d3356] dark:text-white">ifyyy</span>
       </h1>
       <form
-        className="flex flex-col bg-[#13192A] gap-6 text-center px-6 py-9 rounded-lg border-b-4 border-b-[#00C8B4] w-[70%] max-w-[300px]"
+        className="flex flex-col bg-white dark:bg-[#2d3346] gap-6 text-center px-6 py-9 rounded-lg border-b-4 border-b-[#00C8B4] w-[70%] max-w-[300px]"
         onSubmit={(e) => {
           onSubmitHandler(e);
         }}
       >
-        <h1 className="font-bold text-2xl">Login</h1>
+        <h1 className="font-bold text-2xl text-[#2d3356] dark:text-white">
+          Login
+        </h1>
         <input
-          className="rounded-md text-black px-2 py-2 text-xs w-full "
+          className="rounded-lg bg-[#eaeaea] text-black px-2 py-2 text-xs w-full "
           type="text"
           value={userInput}
           onChange={(e) => {

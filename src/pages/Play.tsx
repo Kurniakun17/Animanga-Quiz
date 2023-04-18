@@ -12,13 +12,13 @@ import {
 } from '../utils/localStorageUtils';
 import he from 'he';
 
-interface HomeProps {
+interface PlayProps {
   user: string;
   setUser: React.Dispatch<React.SetStateAction<string>>;
   setQuizResult: React.Dispatch<React.SetStateAction<I.QuizResultProps>>;
 }
 
-export const Home = ({ user, setUser, setQuizResult }: HomeProps) => {
+export const Play = ({ user, setUser, setQuizResult }: PlayProps) => {
   const [datas, setDatas] = useState<I.QuizQuestion[]>(
     getQuestionsFromLocalStorage()
   );

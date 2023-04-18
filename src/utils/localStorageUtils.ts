@@ -48,6 +48,19 @@ export const getHighScoreFromLocalStorage = () => {
   return [];
 };
 
+export const getThemeFromLocalStorage = () => {
+  const storedCountdown = localStorage.getItem('theme');
+  if (storedCountdown !== null) {
+    return storedCountdown;
+  }
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    localStorage.setItem('theme', 'dark');
+    return 'dark';
+  } else {
+    localStorage.setItem('theme', 'light');
+    return 'light';
+  }
+};
 
 export const clearLocalStorage = (keepUser: boolean = false) => {
   if (!keepUser) {

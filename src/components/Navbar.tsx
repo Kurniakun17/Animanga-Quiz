@@ -12,6 +12,7 @@ interface NavbarProps {
 
 export const Navbar = ({ user, setUser, setQuizResult }: NavbarProps) => {
   const navigate = useNavigate();
+
   const onLogoutHandler = () => {
     clearLocalStorage();
     setUser('');
@@ -23,7 +24,10 @@ export const Navbar = ({ user, setUser, setQuizResult }: NavbarProps) => {
     <div className="w-full p-4 px-0 bg-[#2D3346] font-bold">
       <div className="flex justify-between items-center w-[90%] m-auto">
         <h2 className="">Hai, {user}</h2>
-        <button className="px-3 py-1 bg-red-600 rounded-lg" onClick={onLogoutHandler}>
+        <button
+          className="px-3 py-1 bg-red-600 rounded-lg"
+          onClick={onLogoutHandler}
+        >
           Logout
         </button>
       </div>
