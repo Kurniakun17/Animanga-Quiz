@@ -38,7 +38,7 @@ export const shuffleArray = (array: string[]) => {
 
 export const generateDate = () => {
   const date = new Date();
-  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+  return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
 }
 
 export const colorVariants = {

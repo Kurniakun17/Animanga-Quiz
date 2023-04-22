@@ -5,6 +5,7 @@ import { type QuizResultProps } from '../utils/interfaces';
 
 interface HighScoreProps extends QuizResultProps {
   date: string;
+  user: string;
   score: number;
 }
 
@@ -52,6 +53,7 @@ export const HighScore = () => {
               <thead>
                 <tr className="bg-[#2d3346]">
                   <th className="p-3 text-xs md:text-base">Date</th>
+                  <th className="p-3 text-xs md:text-base">User</th>
                   <th className="p-3 text-xs md:text-base">Correct</th>
                   <th className="p-3 text-xs md:text-base">Wrong</th>
                   <th className="p-3 text-xs md:text-base">Unanswered</th>
@@ -69,6 +71,9 @@ export const HighScore = () => {
                       <tr key={`highscore-${index}`}>
                         <td className="p-3 text-[10px] md:text-sm bg-slate-600">
                           {data.date}
+                        </td>
+                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
+                          {data.user}
                         </td>
                         <td className="p-3 text-[10px] md:text-sm bg-slate-600">
                           {data.correct}

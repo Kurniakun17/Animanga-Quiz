@@ -14,6 +14,7 @@ import {
 } from './utils/localStorageUtils';
 import { HighScore } from './pages/HighScore';
 import { About } from './pages/About';
+import { NotFound } from './pages/NotFound';
 
 function App() {
   const [user, setUser] = useState<string>(() => getUserFromLocalStorage());
@@ -41,19 +42,17 @@ function App() {
   };
 
   return (
-    <div className="bg-[#dadada] dark:bg-[#080B15] h-screen text-white font-rubik">
-      <div className="absolute top-[50%] right-0 translate-y-[-50%]">
-        <button
-          className="bg-[#2d3346] dark:bg-[#eaeaea] text-[#eaeaea] dark:text-black px-2 py-1 rounded-l-lg sm:text-xl lg:text-2xl lg:px-3 lg:py-2"
-          onClick={onThemeHandler}
-        >
-          {theme === 'dark' ? (
-            <FontAwesomeIcon icon={faMoon} />
-          ) : (
-            <FontAwesomeIcon icon={faSun} />
-          )}
-        </button>
-      </div>
+    <div className="bg-[#e5e5e5] dark:bg-[#080B15] h-screen text-white font-rubik">
+      <button
+        className="absolute top-[50%] right-0 z-50 translate-y-[-50%] bg-[#2d3346] dark:bg-[#eaeaea] text-[#eaeaea] dark:text-black px-2 py-1 rounded-l-lg sm:text-xl lg:text-2xl lg:px-3 lg:py-2"
+        onClick={onThemeHandler}
+      >
+        {theme === 'dark' ? (
+          <FontAwesomeIcon icon={faMoon} />
+        ) : (
+          <FontAwesomeIcon icon={faSun} />
+        )}
+      </button>
       <Routes>
         <Route
           path="/"
@@ -96,7 +95,17 @@ function App() {
           }
         ></Route>
         <Route path="/high-score" element={<HighScore></HighScore>}></Route>
-        <Route path="/about" element={<About></About>}></Route>
+        <Route
+          path="/about"
+          element={
+            <About
+              user={user}
+              setUser={setUser}
+              setQuizResult={setQuizResult}
+            ></About>
+          }
+        ></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
     </div>
   );

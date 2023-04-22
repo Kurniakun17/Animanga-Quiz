@@ -35,12 +35,13 @@ export const Result = ({
     resetQuizResult(setQuizResult);
     const currentScore = {
       ...quizResult,
+      user,
       score: quizResult.correct * 10,
       date: generateDate(),
     };
-    let HighScore = getHighScoreFromLocalStorage();
-    HighScore = [...HighScore, currentScore];
-    localStorage.setItem('highscore', JSON.stringify(HighScore));
+    let highScoreHistory = getHighScoreFromLocalStorage();
+    highScoreHistory = [...highScoreHistory, currentScore];
+    localStorage.setItem('highscore', JSON.stringify(highScoreHistory));
     clicked === 'play again' ? navigate('/play') : navigate('/main-menu');
   };
 
@@ -52,9 +53,9 @@ export const Result = ({
             Score: {quizResult.correct * 10}/100
           </h1>
           <div className="flex flex-col gap-2">
+            <h2 className="text-gray-300">{`Answered ${quizResult.correct + quizResult.wrong}`}</h2>
             <h2 className="text-[#00C8B4]">{`Correct ${quizResult.correct}`}</h2>
             <h2 className="text-red-500">{`Wrong ${quizResult.wrong}`}</h2>
-            <h2 className="text-gray-300">{`Unanswered ${quizResult.unAnswered}`}</h2>
           </div>
           <button
             className="font-bold bg-[#00C8B4] rounded-md w-full py-2"

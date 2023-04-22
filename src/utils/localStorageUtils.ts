@@ -1,3 +1,5 @@
+import { HighScore } from "../pages/HighScore";
+
 export const getUserFromLocalStorage = () => {
   const storedUser = localStorage.getItem('user');
   const defaultUser = storedUser != null ? storedUser : '';
@@ -33,25 +35,26 @@ export const getResultFromLocalStorage = () => {
 };
 
 export const getIndexFromLocalStorage = () => {
-  const storedCountdown = localStorage.getItem('index');
-  if (storedCountdown !== null) {
-    return parseInt(storedCountdown);
+  const storedIndex = localStorage.getItem('index');
+  if (storedIndex !== null) {
+    return parseInt(storedIndex);
   }
   return 0;
 };
 
+
 export const getHighScoreFromLocalStorage = () => {
-  const storedCountdown = localStorage.getItem('highscore');
-  if (storedCountdown !== null) {
-    return JSON.parse(storedCountdown);
+  const storedHighScore = localStorage.getItem('highscore');
+  if (storedHighScore !== null ) {
+    return JSON.parse(storedHighScore);
   }
   return [];
 };
 
 export const getThemeFromLocalStorage = () => {
-  const storedCountdown = localStorage.getItem('theme');
-  if (storedCountdown !== null) {
-    return storedCountdown;
+  const storedTheme = localStorage.getItem('theme');
+  if (storedTheme !== null) {
+    return storedTheme;
   }
   if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     localStorage.setItem('theme', 'dark');
