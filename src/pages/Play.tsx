@@ -6,9 +6,7 @@ import { Loading } from '../components/Loading';
 import { QuizOptions } from '../components/QuizOptions';
 import type * as I from '../utils/interfaces';
 import {
-  type difficultyColorVariants,
   fetchQuestion,
-  getDifficultyColor,
   isLoggedIn,
 } from '../utils/helpers';
 import {
