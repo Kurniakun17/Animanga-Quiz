@@ -6,9 +6,7 @@ export const colors = ['cyan', 'yellow', 'red', 'green'];
 
 export const fetchQuestion = async () => {
   try {
-    const response = await axios.get(
-      'https://opentdb.com/api.php?amount=10&category=15&difficulty=easy'
-    );
+    const response = await axios.get('https://opentdb.com/api.php?amount=10');
     const data = await response.data.results;
     return data;
   } catch (error) {
@@ -32,6 +30,10 @@ export const displayCountDown = (countDown: number) => {
   }
 };
 
+export const toCamelCase = (text: string) => {
+  return text[0].toUpperCase() + text.slice(1, text.length);
+};
+
 export const shuffleArray = (array: string[]) => {
   return array.sort(() => Math.random() - 0.4);
 };
@@ -39,13 +41,19 @@ export const shuffleArray = (array: string[]) => {
 export const generateDate = () => {
   const date = new Date();
   return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
-}
+};
 
-export const colorVariants = {
+export const optionsColorVariants = {
   cyan: 'bg-cyan-500 hover:bg-cyan-600 border-b-8 border-b-cyan-700',
   yellow: 'bg-yellow-500 hover:bg-yellow-600 border-b-8 border-b-yellow-700',
   red: 'bg-red-500 hover:bg-red-600 border-b-8 border-b-red-700',
   green: 'bg-green-500 hover:bg-green-600 border-b-8 border-b-green-700',
+};
+
+export const difficultyColorVariants = {
+  easy: 'text-[#00cb84]',
+  medium: 'text-[#FFB400]',
+  hard: 'text-[#FA1717]',
 };
 
 export const resetQuizResult = (
@@ -58,6 +66,10 @@ export const resetQuizResult = (
   });
 };
 
-export const getColorVariant = (color: keyof typeof colorVariants) => {
-  return colorVariants[color];
+export const getOptionsColor = (color: keyof typeof optionsColorVariants) => {
+  return optionsColorVariants[color];
+};
+
+export const getDifficultyColor = (color: keyof typeof difficultyColorVariants) => {
+  return difficultyColorVariants[color];
 };

@@ -2,8 +2,8 @@
 import React from 'react';
 import type * as I from '../utils/interfaces';
 import {
-  getColorVariant,
-  type colorVariants,
+  getOptionsColor,
+  type optionsColorVariants,
   shuffleArray,
 } from '../utils/helpers';
 
@@ -42,11 +42,11 @@ export const QuizOptions = ({
     });
   };
 
-  const option = (index: number, color: keyof typeof colorVariants) => {
+  const option = (index: number, color: keyof typeof optionsColorVariants) => {
     return (
       <>
         <button
-          className={`flex text-center items-center ${getColorVariant(
+          className={`flex text-center items-center ${getOptionsColor(
             color
           )} rounded-xl rounded-b-xl px-3 active:translate-y-1 w-full`}
           onClick={() => {

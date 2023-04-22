@@ -24,7 +24,7 @@ export const HighScore = () => {
   };
 
   return (
-    <div className="h-[80vh] flex justify-center items-center">
+    <div className="h-[90vh] flex justify-center items-center">
       <div className="w-[90%] max-w-[800px] flex flex-col gap-2 rounded-md">
         <div className="flex justify-between">
           <button
@@ -65,7 +65,7 @@ export const HighScore = () => {
                   .sort(
                     (a: HighScoreProps, b: HighScoreProps) => b.score - a.score
                   )
-                  .slice(0, 10)
+                  .slice(0, 5)
                   .map((data: HighScoreProps, index: number) => {
                     return (
                       <tr key={`highscore-${index}`}>
