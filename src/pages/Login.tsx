@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isLoggedIn, resetQuizResult } from '../utils/helpers';
 import { clearLocalStorage } from '../utils/localStorageUtils';
 import type * as I from '../utils/interfaces';
 
-interface LoginProps {
-  user: string;
-  setUser: React.Dispatch<React.SetStateAction<string>>;
-  setQuizResult: React.Dispatch<React.SetStateAction<I.QuizResultProps>>;
-}
 
-export const Login = ({ user, setUser, setQuizResult }: LoginProps) => {
-  const [userInput, setUserInput] = useState<string>('');
+export const Login = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
+  const userInput = useRef<string>('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,15 +14,15 @@ export const Login = ({ user, setUser, setQuizResult }: LoginProps) => {
   }, []);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInput(e.target.value);
+    userInput.current = (e.target.value);
   };
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     clearLocalStorage();
-    setUser(userInput);
+    setUser(userInput.current);
     resetQuizResult(setQuizResult);
-    localStorage.setItem('user', userInput);
+    localStorage.setItem('user', userInput.current);
     navigate('/main-menu');
   };
 
@@ -48,7 +43,6 @@ export const Login = ({ user, setUser, setQuizResult }: LoginProps) => {
         <input
           className="rounded-lg bg-[#eaeaea] text-black px-2 py-2 text-xs w-full "
           type="text"
-          value={userInput}
           onChange={(e) => {
             onChangeHandler(e);
           }}

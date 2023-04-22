@@ -5,13 +5,7 @@ import { useNavigate } from 'react-router';
 import { isLoggedIn } from '../utils/helpers';
 import { getQuestionsFromLocalStorage } from '../utils/localStorageUtils';
 
-interface MainMenuProps {
-  user: string;
-  setUser: React.Dispatch<React.SetStateAction<string>>;
-  setQuizResult: React.Dispatch<React.SetStateAction<I.QuizResultProps>>;
-}
-
-export const MainMenu = ({ user, setUser, setQuizResult }: MainMenuProps) => {
+export const MainMenu = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
   const isPausedRef = useRef<boolean>(
     getQuestionsFromLocalStorage().length > 1
   );

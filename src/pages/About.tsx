@@ -4,13 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import type * as I from '../utils/interfaces';
 
-interface AboutProps {
-  user: string;
-  setUser: React.Dispatch<React.SetStateAction<string>>;
-  setQuizResult: React.Dispatch<React.SetStateAction<I.QuizResultProps>>;
-}
-
-export const About = ({ user, setUser, setQuizResult }: AboutProps) => {
+export const About = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
   const navigate = useNavigate();
 
   const onBackHandler = () => {

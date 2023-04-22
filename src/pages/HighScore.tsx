@@ -24,7 +24,7 @@ export const HighScore = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-[80vh] flex justify-center items-center">
       <div className="w-[90%] max-w-[800px] flex flex-col gap-2 rounded-md">
         <div className="flex justify-between">
           <button
@@ -54,9 +54,9 @@ export const HighScore = () => {
                 <tr className="bg-[#2d3346]">
                   <th className="p-3 text-xs md:text-base">Date</th>
                   <th className="p-3 text-xs md:text-base">User</th>
+                  <th className="p-3 text-xs md:text-base">Answered</th>
                   <th className="p-3 text-xs md:text-base">Correct</th>
                   <th className="p-3 text-xs md:text-base">Wrong</th>
-                  <th className="p-3 text-xs md:text-base">Unanswered</th>
                   <th className="p-3 text-xs md:text-base">Scores</th>
                 </tr>
               </thead>
@@ -76,13 +76,13 @@ export const HighScore = () => {
                           {data.user}
                         </td>
                         <td className="p-3 text-[10px] md:text-sm bg-slate-600">
+                          {data.correct + data.wrong}
+                        </td>
+                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
                           {data.correct}
                         </td>
                         <td className="p-3 text-[10px] md:text-sm bg-slate-600">
                           {data.wrong}
-                        </td>
-                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
-                          {data.unAnswered}
                         </td>
                         <td className="p-3 text-[10px] md:text-sm bg-slate-600">
                           {data.score}

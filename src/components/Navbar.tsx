@@ -4,13 +4,7 @@ import { clearLocalStorage } from '../utils/localStorageUtils';
 import type * as I from '../utils/interfaces';
 import { resetQuizResult } from '../utils/helpers';
 
-interface NavbarProps {
-  user: string;
-  setUser: React.Dispatch<React.SetStateAction<string>>;
-  setQuizResult: React.Dispatch<React.SetStateAction<I.QuizResultProps>>;
-}
-
-export const Navbar = ({ user, setUser, setQuizResult }: NavbarProps) => {
+export const Navbar = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
   const navigate = useNavigate();
 
   const onLogoutHandler = () => {

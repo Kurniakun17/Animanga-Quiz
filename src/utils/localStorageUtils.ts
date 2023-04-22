@@ -1,5 +1,3 @@
-import { HighScore } from "../pages/HighScore";
-
 export const getUserFromLocalStorage = () => {
   const storedUser = localStorage.getItem('user');
   const defaultUser = storedUser != null ? storedUser : '';

@@ -15,3 +15,9 @@ export interface QuizResultProps{
   wrong: number;
   unAnswered: number;
 }
+
+export interface NavbarProps {
+  user: string;
+  setUser: React.Dispatch<React.SetStateAction<string>>;
+  setQuizResult: React.Dispatch<React.SetStateAction<QuizResultProps>>;
+}
