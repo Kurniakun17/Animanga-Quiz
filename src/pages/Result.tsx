@@ -31,11 +31,6 @@ export const Result = ({
   };
 
   const onButtonHandler = (clicked: string) => {
-    if (clicked === 'see the answer') {
-      navigate('/answer')
-      return;
-    }
-    clearLocalStorage(true);
     resetQuizResult(setQuizResult);
     const currentScore = {
       ...quizResult,
@@ -46,6 +41,11 @@ export const Result = ({
     let highScoreHistory = getHighScoreFromLocalStorage();
     highScoreHistory = [...highScoreHistory, currentScore];
     localStorage.setItem('highscore', JSON.stringify(highScoreHistory));
+    if (clicked === 'see the answer') {
+      navigate('/answer');
+      return;
+    }
+    clearLocalStorage(true);
     clicked === 'play again' ? navigate('/play') : navigate('/main-menu');
   };
 
