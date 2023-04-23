@@ -15,7 +15,12 @@ import {
 } from '../utils/localStorageUtils';
 import { QuestionPanel } from '../components/QuestionPanel';
 
-export const Play = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
+interface PlayProps{
+  user: string
+  setQuizResult: React.Dispatch<React.SetStateAction<I.QuizResultProps>>
+}
+
+export const Play = ({ user, setQuizResult }: PlayProps) => {
   const [datas, setDatas] = useState<I.QuizQuestion[]>(
     getQuestionsFromLocalStorage()
   );
@@ -52,13 +57,13 @@ export const Play = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
 
   return (
     <div>
-      <Navbar user={user} setUser={setUser} setQuizResult={setQuizResult} />
+      <Navbar />
       <div className="flex flex-col gap-4 w-[80%] max-w-[800px] m-auto">
         <Miscbar questionIndex={questionIndex} isTimeOut={isTimeOut}></Miscbar>
         <QuestionPanel
           difficulty={datas[questionIndex].difficulty}
           category={datas[questionIndex].category}
-          question={datas[questionIndex].question}
+          text={datas[questionIndex].question}
         ></QuestionPanel>
       </div>
       <QuizOptions

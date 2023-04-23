@@ -31,6 +31,10 @@ export const Result = ({
   };
 
   const onButtonHandler = (clicked: string) => {
+    if (clicked === 'see the answer') {
+      navigate('/answer')
+      return;
+    }
     clearLocalStorage(true);
     resetQuizResult(setQuizResult);
     const currentScore = {
@@ -53,7 +57,9 @@ export const Result = ({
             Score: {quizResult.correct * 10}/100
           </h1>
           <div className="flex flex-col gap-2">
-            <h2 className="text-gray-300">{`Answered ${quizResult.correct + quizResult.wrong}`}</h2>
+            <h2 className="text-gray-300">{`Answered ${
+              quizResult.correct + quizResult.wrong
+            }`}</h2>
             <h2 className="text-[#00C8B4]">{`Correct ${quizResult.correct}`}</h2>
             <h2 className="text-red-500">{`Wrong ${quizResult.wrong}`}</h2>
           </div>
@@ -64,6 +70,14 @@ export const Result = ({
             }}
           >
             Play Again
+          </button>
+          <button
+            className="font-bold bg-[#00C8B4] rounded-md w-full py-2"
+            onClick={() => {
+              onButtonHandler('see the answer');
+            }}
+          >
+            See the Answer
           </button>
           <button
             className="font-bold bg-[#00C8B4] rounded-md w-full py-2"

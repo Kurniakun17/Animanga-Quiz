@@ -15,6 +15,8 @@ import {
 import { HighScore } from './pages/HighScore';
 import { About } from './pages/About';
 import { NotFound } from './pages/NotFound';
+import { NavbarContext } from './utils/Contexts';
+import { Answer } from './pages/Answer';
 
 function App() {
   const [user, setUser] = useState<string>(() => getUserFromLocalStorage());
@@ -42,72 +44,54 @@ function App() {
   };
 
   return (
-    <div className="bg-[#e5e5e5] dark:bg-[#080B15] h-screen text-white font-rubik">
-      <button
-        className="absolute top-[50%] right-0 z-50 translate-y-[-50%] bg-[#2d3346] dark:bg-[#eaeaea] text-[#eaeaea] dark:text-black px-2 py-1 rounded-l-lg sm:text-xl lg:text-2xl lg:px-3 lg:py-2"
-        onClick={onThemeHandler}
-      >
-        {theme === 'dark' ? (
-          <FontAwesomeIcon icon={faMoon} />
-        ) : (
-          <FontAwesomeIcon icon={faSun} />
-        )}
-      </button>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Login
-              user={user}
-              setUser={setUser}
-              setQuizResult={setQuizResult}
-            ></Login>
-          }
-        ></Route>
-        <Route
-          path="/play"
-          element={
-            <Play
-              user={user}
-              setUser={setUser}
-              setQuizResult={setQuizResult}
-            ></Play>
-          }
-        ></Route>
-        <Route
-          path="/result"
-          element={
-            <Result
-              user={user}
-              quizResult={quizResult}
-              setQuizResult={setQuizResult}
-            ></Result>
-          }
-        ></Route>
-        <Route
-          path="/main-menu"
-          element={
-            <MainMenu
-              user={user}
-              setUser={setUser}
-              setQuizResult={setQuizResult}
-            ></MainMenu>
-          }
-        ></Route>
-        <Route path="/high-score" element={<HighScore></HighScore>}></Route>
-        <Route
-          path="/about"
-          element={
-            <About
-              user={user}
-              setUser={setUser}
-              setQuizResult={setQuizResult}
-            ></About>
-          }
-        ></Route>
-        <Route path="*" element={<NotFound></NotFound>}></Route>
-      </Routes>
-    </div>
+    <NavbarContext.Provider value={{ user, setUser, setQuizResult }}>
+      <div className="bg-[#e5e5e5] dark:bg-[#080B15] h-screen text-white font-rubik">
+        <button
+          className="absolute top-[50%] right-0 z-50 translate-y-[-50%] bg-[#2d3346] dark:bg-[#eaeaea] text-[#eaeaea] dark:text-black px-2 py-1 rounded-l-lg sm:text-xl lg:text-2xl lg:px-3 lg:py-2"
+          onClick={onThemeHandler}
+        >
+          {theme === 'dark' ? (
+            <FontAwesomeIcon icon={faMoon} />
+          ) : (
+            <FontAwesomeIcon icon={faSun} />
+          )}
+        </button>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Login
+                user={user}
+                setUser={setUser}
+                setQuizResult={setQuizResult}
+              ></Login>
+            }
+          ></Route>
+          <Route
+            path="/play"
+            element={<Play user={user} setQuizResult={setQuizResult}></Play>}
+          ></Route>
+          <Route
+            path="/result"
+            element={
+              <Result
+                user={user}
+                quizResult={quizResult}
+                setQuizResult={setQuizResult}
+              ></Result>
+            }
+          ></Route>
+          <Route path="/answer" element={<Answer user={user}></Answer>}></Route>
+          <Route
+            path="/main-menu"
+            element={<MainMenu user={user}></MainMenu>}
+          ></Route>
+          <Route path="/high-score" element={<HighScore></HighScore>}></Route>
+          <Route path="/about" element={<About></About>}></Route>
+          <Route path="*" element={<NotFound></NotFound>}></Route>
+        </Routes>
+      </div>
+    </NavbarContext.Provider>
   );
 }
 

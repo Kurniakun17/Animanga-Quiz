@@ -8,16 +8,16 @@ import he from 'he';
 interface QuestionPanelProps {
   difficulty: string;
   category: string;
-  question: string;
+  text: string;
 }
 
 export const QuestionPanel = ({
   difficulty,
   category,
-  question,
+  text,
 }: QuestionPanelProps) => {
   return (
-    <div className="relative flex items-center text-center bg-[#2D3346] h-[30vh] rounded-lg px-8">
+    <div className="relative flex items-center text-center bg-[#2D3346] h-[30vh] rounded-lg px-8 w-full">
       <div className="absolute top-2 left-0 flex w-full px-4 py-2 justify-between">
         <h4
           className={`block py-1 px-2 font-bold bg-white ${getDifficultyColor(
@@ -31,7 +31,7 @@ export const QuestionPanel = ({
         </h4>
       </div>
       <h3 className="w-full font-bold xl:text-lg">
-        {he.decode(question)}
+        {he.decode(text)}
       </h3>
     </div>
   );

@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import React from 'react';
+import React, { useEffect } from 'react';
 import type * as I from '../utils/interfaces';
 import {
   getOptionsColor,
   type optionsColorVariants,
   shuffleArray,
 } from '../utils/helpers';
+import { getAnswersFromLocalStorage } from '../utils/localStorageUtils';
+import { json } from 'react-router-dom';
 
 interface QuizOptionsProps extends I.QuizAnswers {
   setQuestionIndex: React.Dispatch<React.SetStateAction<number>>;
@@ -22,6 +24,11 @@ export const QuizOptions = ({
   const answers = shuffleArray([...incorrect_answers, correct_answer]);
 
   const CheckAnswer = (answer: string) => {
+    const storageAnswers = getAnswersFromLocalStorage();
+    localStorage.setItem(
+      'answers',
+      JSON.stringify([...storageAnswers, answer])
+    );
     if (answer === correct_answer) {
       setQuizResult((prev) => {
         const resultData = { ...prev, correct: prev.correct + 1 };
@@ -35,9 +42,9 @@ export const QuizOptions = ({
         return resultData;
       });
     }
-    isEnded();
     setQuestionIndex((prev: number) => {
       localStorage.setItem('index', `${prev + 1}`);
+      isEnded();
       return prev + 1;
     });
   };

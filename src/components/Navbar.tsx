@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { clearLocalStorage } from '../utils/localStorageUtils';
 import type * as I from '../utils/interfaces';
 import { resetQuizResult } from '../utils/helpers';
+import { NavbarContext } from '../utils/Contexts';
 
-export const Navbar = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
+export const Navbar = () => {
+  const { user, setUser, setQuizResult } = useContext(NavbarContext);
   const navigate = useNavigate();
 
   const onLogoutHandler = () => {

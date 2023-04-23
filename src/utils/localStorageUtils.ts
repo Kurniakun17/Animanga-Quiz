@@ -28,7 +28,6 @@ export const getResultFromLocalStorage = () => {
   return {
     correct: 0,
     wrong: 0,
-    unAnswered: 0,
   };
 };
 
@@ -40,10 +39,9 @@ export const getIndexFromLocalStorage = () => {
   return 0;
 };
 
-
 export const getHighScoreFromLocalStorage = () => {
   const storedHighScore = localStorage.getItem('highscore');
-  if (storedHighScore !== null ) {
+  if (storedHighScore !== null) {
     return JSON.parse(storedHighScore);
   }
   return [];
@@ -63,6 +61,14 @@ export const getThemeFromLocalStorage = () => {
   }
 };
 
+export const getAnswersFromLocalStorage = () => {
+  const storedAnswers = localStorage.getItem('answers');
+  if (storedAnswers !== null) {
+    return JSON.parse(storedAnswers);
+  }
+  return [];
+};
+
 export const clearLocalStorage = (keepUser: boolean = false) => {
   if (!keepUser) {
     localStorage.removeItem('user');
@@ -71,4 +77,5 @@ export const clearLocalStorage = (keepUser: boolean = false) => {
   localStorage.removeItem('questions');
   localStorage.removeItem('index');
   localStorage.removeItem('result');
+  localStorage.removeItem('answers');
 };

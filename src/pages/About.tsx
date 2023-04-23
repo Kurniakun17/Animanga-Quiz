@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import type * as I from '../utils/interfaces';
 
-export const About = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
+export const About = () => {
   const navigate = useNavigate();
 
   const onBackHandler = () => {
@@ -12,11 +12,7 @@ export const About = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
   };
   return (
     <div className="relative h-screen">
-      <Navbar
-        user={user}
-        setUser={setUser}
-        setQuizResult={setQuizResult}
-      ></Navbar>
+      <Navbar></Navbar>
       <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full flex justify-center items-center">
         <div className="absolute flex flex-col rounded-lg p-10 py-16 justify-center items-center bg-[#fafafa] dark:bg-[#2D3346] text-center w-[80%] max-w-[650px] gap-6">
           <button

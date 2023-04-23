@@ -10,7 +10,9 @@ export const Login = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    isLoggedIn(user, navigate);
+    if(user !== ''){
+      navigate('/main-menu')
+    }
   }, []);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

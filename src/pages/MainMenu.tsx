@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { isLoggedIn } from '../utils/helpers';
 import { getQuestionsFromLocalStorage } from '../utils/localStorageUtils';
 
-export const MainMenu = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
+export const MainMenu = ({ user }: {user: string}) => {
   const isPausedRef = useRef<boolean>(
     getQuestionsFromLocalStorage().length > 1
   );
@@ -29,11 +29,7 @@ export const MainMenu = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
 
   return (
     <>
-      <Navbar
-        user={user}
-        setUser={setUser}
-        setQuizResult={setQuizResult}
-      ></Navbar>
+      <Navbar></Navbar>
       <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] justify-center items-center w-[70%] max-w-[400px]">
         <h1 className="font-bold mb-8 text-4xl text-[#00C8B4] text-center">
           Quiz<span className="text-[#2d3346] dark:text-white">ifyyy</span>
