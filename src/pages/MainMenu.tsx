@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { Navbar } from '../components/Navbar';
-import type * as I from '../utils/interfaces';
 import { useNavigate } from 'react-router';
 import { isLoggedIn } from '../utils/helpers';
 import { getQuestionsFromLocalStorage } from '../utils/localStorageUtils';
 
-export const MainMenu = ({ user }: {user: string}) => {
+export const MainMenu = ({ user }: { user: string }) => {
   const isPausedRef = useRef<boolean>(
     getQuestionsFromLocalStorage().length > 1
   );

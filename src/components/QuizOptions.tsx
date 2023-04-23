@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import React, { useEffect } from 'react';
+import React from 'react';
 import type * as I from '../utils/interfaces';
 import {
   getOptionsColor,
@@ -7,7 +7,6 @@ import {
   shuffleArray,
 } from '../utils/helpers';
 import { getAnswersFromLocalStorage } from '../utils/localStorageUtils';
-import { json } from 'react-router-dom';
 
 interface QuizOptionsProps extends I.QuizAnswers {
   setQuestionIndex: React.Dispatch<React.SetStateAction<number>>;
@@ -44,9 +43,9 @@ export const QuizOptions = ({
     }
     setQuestionIndex((prev: number) => {
       localStorage.setItem('index', `${prev + 1}`);
-      isEnded();
       return prev + 1;
     });
+    isEnded();
   };
 
   const option = (index: number, color: keyof typeof optionsColorVariants) => {

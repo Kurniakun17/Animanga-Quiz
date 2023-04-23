@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { clearLocalStorage } from '../utils/localStorageUtils';
-import type * as I from '../utils/interfaces';
 import { resetQuizResult } from '../utils/helpers';
 import { NavbarContext } from '../utils/Contexts';
 

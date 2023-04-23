@@ -1,22 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { isLoggedIn, resetQuizResult } from '../utils/helpers';
+import { resetQuizResult } from '../utils/helpers';
 import { clearLocalStorage } from '../utils/localStorageUtils';
 import type * as I from '../utils/interfaces';
-
 
 export const Login = ({ user, setUser, setQuizResult }: I.NavbarProps) => {
   const userInput = useRef<string>('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(user !== ''){
-      navigate('/main-menu')
+    if (user !== '') {
+      navigate('/main-menu');
     }
   }, []);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    userInput.current = (e.target.value);
+    userInput.current = e.target.value;
   };
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
