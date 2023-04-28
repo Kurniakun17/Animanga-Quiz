@@ -17,7 +17,7 @@ export const QuestionPanel = ({
   text,
 }: QuestionPanelProps) => {
   return (
-    <div className="relative flex items-center text-center bg-white dark:bg-[#2D3346] h-[35vh] rounded-lg px-8 w-full">
+    <div className="relative flex items-center text-center bg-white dark:bg-[#2D3346] h-[30vh] rounded-lg px-8 w-full">
       <div className="absolute top-3 left-0 flex w-full px-4 py-2 justify-between">
         <h4
           className={`block py-1 px-2 font-bold bg-[#2D3346] dark:bg-white ${getDifficultyColor(
