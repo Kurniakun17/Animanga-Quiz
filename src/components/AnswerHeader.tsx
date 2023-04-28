@@ -27,11 +27,11 @@ export const AnswerHeader = ({
         <h2 className="p-2 bg-white w-fit rounded-md dark:bg-[#2d3346]">
           {answerIndex + 1}/10
         </h2>
-
         <h2 className="relative p-2 px-5 bg-white w-fit rounded-md dark:bg-[#2d3346] group">
           <FontAwesomeIcon icon={faInfo}></FontAwesomeIcon>
-          <span className="absolute text-center top-12 left-[50%] translate-x-[-50%] w-[400%] p-2 bg-white rounded-md dark:bg-[#464d67] scale-0 opacity-[80%] group-hover:scale-100">
-            The <span className='font-bold text-yellow-500'>orange</span> options is your answers
+          <span className="absolute text-center top-12 left-[50%] translate-x-[-50%] w-[400%] p-2 bg-white rounded-md dark:bg-[#464d67] scale-0  group-hover:scale-100">
+            The <span className="font-bold text-yellow-500">orange</span>{' '}
+            options is your answers
           </span>
         </h2>
       </div>
