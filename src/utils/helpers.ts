@@ -1,14 +1,23 @@
 import axios from 'axios';
 import type * as I from './interfaces';
 import { type NavigateFunction } from 'react-router';
+import he from 'he';
 
 export const colors = ['cyan', 'yellow', 'red', 'green'];
 
 export const fetchQuestion = async () => {
   try {
     const response = await axios.get('https://opentdb.com/api.php?amount=10');
-    const data = await response.data.results;
-    return data;
+    let datas = await response.data.results;
+    datas = datas.map((data: I.QuizQuestion) => {
+      const shuffledAns = shuffleArray([
+        ...data.incorrect_answers,
+        data.correct_answer,
+      ]);
+      return { ...data, answers: shuffledAns };
+    });
+    console.log(datas);
+    return datas;
   } catch (error) {
     console.log(error);
   }
@@ -62,7 +71,6 @@ export const resetQuizResult = (
   setQuizResult({
     correct: 0,
     wrong: 0,
-    unAnswered: 0,
   });
 };
 
@@ -70,6 +78,10 @@ export const getOptionsColor = (color: keyof typeof optionsColorVariants) => {
   return optionsColorVariants[color];
 };
 
-export const getDifficultyColor = (color: keyof typeof difficultyColorVariants) => {
+export const getDifficultyColor = (
+  color: keyof typeof difficultyColorVariants
+) => {
   return difficultyColorVariants[color];
 };
+
+export const decode = (text: string) => he.decode(text);

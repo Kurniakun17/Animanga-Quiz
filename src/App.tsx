@@ -51,9 +51,9 @@ function App() {
           onClick={onThemeHandler}
         >
           {theme === 'dark' ? (
-            <FontAwesomeIcon icon={faMoon} />
-          ) : (
             <FontAwesomeIcon icon={faSun} />
+          ) : (
+            <FontAwesomeIcon icon={faMoon} />
           )}
         </button>
         <Routes>
@@ -84,7 +84,9 @@ function App() {
           <Route path="/answer" element={<Answer user={user}></Answer>}></Route>
           <Route
             path="/main-menu"
-            element={<MainMenu user={user}></MainMenu>}
+            element={
+              <MainMenu user={user} setQuizResult={setQuizResult}></MainMenu>
+            }
           ></Route>
           <Route path="/high-score" element={<HighScore></HighScore>}></Route>
           <Route path="/about" element={<About></About>}></Route>

@@ -3,8 +3,14 @@ import { Navbar } from '../components/Navbar';
 import { useNavigate } from 'react-router';
 import { isLoggedIn } from '../utils/helpers';
 import { getQuestionsFromLocalStorage } from '../utils/localStorageUtils';
+import { type QuizResultProps } from '../utils/interfaces';
 
-export const MainMenu = ({ user }: { user: string }) => {
+interface MainMenuProps {
+  user: string;
+  setQuizResult: React.Dispatch<React.SetStateAction<QuizResultProps>>;
+}
+
+export const MainMenu = ({ user, setQuizResult }: MainMenuProps) => {
   const isPausedRef = useRef<boolean>(
     getQuestionsFromLocalStorage().length > 1
   );
@@ -15,6 +21,10 @@ export const MainMenu = ({ user }: { user: string }) => {
   }, []);
 
   const onPlayHandler = () => {
+    setQuizResult({
+      correct: 0,
+      wrong: 0,
+    });
     navigate('/play');
   };
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { getHighScoreFromLocalStorage } from '../utils/localStorageUtils';
 import { type QuizResultProps } from '../utils/interfaces';
+import { HighScoreTable } from '../components/HighScoreTable';
 
 interface HighScoreProps extends QuizResultProps {
   date: string;
@@ -11,7 +12,7 @@ interface HighScoreProps extends QuizResultProps {
 
 export const HighScore = () => {
   const navigate = useNavigate();
-  const [highScore, setHighScore] = useState<[] | HighScoreProps[]>(
+  const [highScoreData, setHighScoreData] = useState<[] | HighScoreProps[]>(
     getHighScoreFromLocalStorage()
   );
   const onBackHandler = () => {
@@ -20,7 +21,7 @@ export const HighScore = () => {
 
   const onResetHandler = () => {
     localStorage.removeItem('highscore');
-    setHighScore([]);
+    setHighScoreData([]);
   };
 
   return (
@@ -43,56 +44,16 @@ export const HighScore = () => {
         <h1 className="text-2xl lg:text-3xl font-bold text-center mb-4 text-[#00C8B4]">
           High Score
         </h1>
-        {highScore.length === 0 ? (
+        {highScoreData.length === 0 ? (
           <h1 className="font-bold text-center text-3xl my-4 bg-[#2d3346] p-3 rounded-lg">
             No History!
           </h1>
         ) : (
-          <div className="rounded-lg overflow-auto">
-            <table className=" w-full text-center">
-              <thead>
-                <tr className="bg-[#2d3346]">
-                  <th className="p-3 text-xs md:text-base">Date</th>
-                  <th className="p-3 text-xs md:text-base">User</th>
-                  <th className="p-3 text-xs md:text-base">Answered</th>
-                  <th className="p-3 text-xs md:text-base">Correct</th>
-                  <th className="p-3 text-xs md:text-base">Wrong</th>
-                  <th className="p-3 text-xs md:text-base">Scores</th>
-                </tr>
-              </thead>
-              <tbody>
-                {highScore
-                  .sort(
-                    (a: HighScoreProps, b: HighScoreProps) => b.score - a.score
-                  )
-                  .slice(0, 5)
-                  .map((data: HighScoreProps, index: number) => {
-                    return (
-                      <tr key={`highscore-${index}`}>
-                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
-                          {data.date}
-                        </td>
-                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
-                          {data.user}
-                        </td>
-                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
-                          {data.correct + data.wrong}
-                        </td>
-                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
-                          {data.correct}
-                        </td>
-                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
-                          {data.wrong}
-                        </td>
-                        <td className="p-3 text-[10px] md:text-sm bg-slate-600">
-                          {data.score}
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
-          </div>
+          <HighScoreTable
+            highScoreData={highScoreData
+              .sort((a: HighScoreProps, b: HighScoreProps) => b.score - a.score)
+              .slice(0, 5)}
+          ></HighScoreTable>
         )}
       </div>
     </div>

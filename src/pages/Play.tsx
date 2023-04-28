@@ -5,23 +5,24 @@ import { Miscbar } from '../components/Miscbar';
 import { Loading } from '../components/Loading';
 import { QuizOptions } from '../components/QuizOptions';
 import type * as I from '../utils/interfaces';
-import {
-  fetchQuestion,
-  isLoggedIn,
-} from '../utils/helpers';
+import { fetchQuestion, isLoggedIn } from '../utils/helpers';
 import {
   getIndexFromLocalStorage,
   getQuestionsFromLocalStorage,
 } from '../utils/localStorageUtils';
 import { QuestionPanel } from '../components/QuestionPanel';
 
-interface PlayProps{
-  user: string
-  setQuizResult: React.Dispatch<React.SetStateAction<I.QuizResultProps>>
+interface PlayProps {
+  user: string;
+  setQuizResult: React.Dispatch<React.SetStateAction<I.QuizResultProps>>;
+}
+
+interface DatasProps extends I.QuizQuestion {
+  answers: string[];
 }
 
 export const Play = ({ user, setQuizResult }: PlayProps) => {
-  const [datas, setDatas] = useState<I.QuizQuestion[]>(
+  const [datas, setDatas] = useState<DatasProps[]>(
     getQuestionsFromLocalStorage()
   );
   const [questionIndex, setQuestionIndex] = useState<number>(
@@ -51,27 +52,32 @@ export const Play = ({ user, setQuizResult }: PlayProps) => {
     navigate('/result');
   };
 
-  if (datas.length === 0) {
-    return <Loading></Loading>;
-  }
-
   return (
-    <div>
-      <Navbar />
-      <div className="flex flex-col gap-4 w-[80%] max-w-[800px] m-auto">
-        <Miscbar questionIndex={questionIndex} isTimeOut={isTimeOut}></Miscbar>
-        <QuestionPanel
-          difficulty={datas[questionIndex].difficulty}
-          category={datas[questionIndex].category}
-          text={datas[questionIndex].question}
-        ></QuestionPanel>
-      </div>
-      <QuizOptions
-        {...datas[questionIndex]}
-        setQuestionIndex={setQuestionIndex}
-        setQuizResult={setQuizResult}
-        isEnded={isEnded}
-      ></QuizOptions>
-    </div>
+    <>
+      {datas.length === 0 ? (
+        <Loading></Loading>
+      ) : (
+        <div>
+          <Navbar />
+          <div className="flex flex-col gap-4 w-[80%] max-w-[800px] m-auto">
+            <Miscbar
+              questionIndex={questionIndex}
+              isTimeOut={isTimeOut}
+            ></Miscbar>
+            <QuestionPanel
+              difficulty={datas[questionIndex].difficulty}
+              category={datas[questionIndex].category}
+              text={datas[questionIndex].question}
+            ></QuestionPanel>
+          </div>
+          <QuizOptions
+            {...datas[questionIndex]}
+            setQuestionIndex={setQuestionIndex}
+            setQuizResult={setQuizResult}
+            isEnded={isEnded}
+          ></QuizOptions>
+        </div>
+      )}
+    </>
   );
 };

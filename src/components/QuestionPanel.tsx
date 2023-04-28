@@ -17,10 +17,10 @@ export const QuestionPanel = ({
   text,
 }: QuestionPanelProps) => {
   return (
-    <div className="relative flex items-center text-center bg-[#2D3346] h-[30vh] rounded-lg px-8 w-full">
-      <div className="absolute top-2 left-0 flex w-full px-4 py-2 justify-between">
+    <div className="relative flex items-center text-center bg-white dark:bg-[#2D3346] h-[35vh] rounded-lg px-8 w-full">
+      <div className="absolute top-3 left-0 flex w-full px-4 py-2 justify-between">
         <h4
-          className={`block py-1 px-2 font-bold bg-white ${getDifficultyColor(
+          className={`block py-1 px-2 font-bold bg-[#2D3346] dark:bg-white ${getDifficultyColor(
             difficulty as keyof typeof difficultyColorVariants
           )} rounded text-[10px] md:text-xs`}
         >
@@ -30,7 +30,7 @@ export const QuestionPanel = ({
           {category}
         </h4>
       </div>
-      <h3 className="w-full font-bold xl:text-lg">
+      <h3 className="w-full font-bold xl:text-lg text-[#2D3346] dark:text-white">
         {he.decode(text)}
       </h3>
     </div>

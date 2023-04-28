@@ -13,7 +13,6 @@ export interface QuizQuestion extends QuizAnswers {
 export interface QuizResultProps{
   correct: number;
   wrong: number;
-  unAnswered: number;
 }
 
 export interface NavbarProps {
