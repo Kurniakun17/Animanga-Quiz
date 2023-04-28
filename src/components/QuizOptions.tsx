@@ -45,7 +45,7 @@ export const QuizOptions = ({
 
   return (
     <div
-      className={`absolute bottom-4 xl:bottom-8 left-0 right-0 grid grid-cols-2 xl:flex w-[90%] h-[30vh] lg:h-[35vh] m-auto gap-3`}
+      className={`absolute bottom-4 xl:bottom-8 left-0 right-0 grid grid-cols-2 xl:flex w-[90%] h-[30vh] m-auto gap-3`}
     >
       {answers.length === 2 ? (
         <>
