@@ -16,7 +16,7 @@ export const AnswerButton = ({
   return (
     <>
       <button
-        className="flex text-sm md:text-base items-center gap-2 p-2 text-slate-700 bg-white dark:bg-slate-700 dark:disabled:bg-slate-500 disabled:bg-slate-300 dark:disabled:text-slate-300 disabled:text-slate-500 dark:text-white rounded-md active:translate-y-1 border-b-4 border-slate-500 rounded-b-lg"
+        className="flex text-sm md:text-base items-center gap-2 p-2 text-slate-700 bg-white dark:bg-slate-700 dark:disabled:bg-slate-500 disabled:bg-slate-300 dark:disabled:text-slate-300 disabled:text-slate-500 dark:text-white rounded-md active:translate-y-1 border-b-4 border-slate-500 dark:border-slate-300 dark:disabled:border-slate-700 rounded-b-lg"
         onClick={() => {
           onNavigateQuestionHandler('back');
         }}
@@ -25,13 +25,13 @@ export const AnswerButton = ({
         <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>Back
       </button>
       <button
-        className="flex text-sm md:text-base items-center gap-2 p-2 text-slate-700 bg-white dark:bg-slate-700 dark:text-white rounded-md border-b-4 border-slate-500 rounded-b-lg active:translate-y-1 "
+        className="flex text-sm md:text-base items-center gap-2 p-2 text-slate-700 bg-white dark:bg-slate-700 dark:text-white rounded-md border-b-4 border-slate-500 dark:border-slate-300 dark:disabled:border-slate-700 rounded-b-lg active:translate-y-1 "
         onClick={onFlippedHandler}
       >
         Flipped the Panel
       </button>
       <button
-        className="flex text-sm md:text-base items-center gap-2 px-2 py-1 text-slate-700 bg-white dark:bg-slate-700 dark:disabled:bg-slate-500 disabled:bg-slate-300 dark:disabled:text-slate-300 disabled:text-slate-500 dark:text-white rounded-md active:translate-y-1 border-b-4 border-slate-500 rounded-b-lg"
+        className="flex text-sm md:text-base items-center gap-2 px-2 py-1 text-slate-700 bg-white dark:bg-slate-700 dark:disabled:bg-slate-500 disabled:bg-slate-300 dark:disabled:text-slate-300 disabled:text-slate-500 dark:text-white rounded-md active:translate-y-1 border-b-4 border-slate-500 dark:border-slate-300 dark:disabled:border-slate-700 rounded-b-lg"
         onClick={() => {
           onNavigateQuestionHandler('next');
         }}
