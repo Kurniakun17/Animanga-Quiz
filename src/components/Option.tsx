@@ -5,7 +5,7 @@ import { decode } from '../utils/helpers';
 interface OptionProps {
   color: keyof typeof optionsColorVariants;
   text: string;
-  CheckAnswer: (answer:string) => void;
+  CheckAnswer: (answer: string) => void;
 }
 
 export const Option = ({ color, text, CheckAnswer }: OptionProps) => {

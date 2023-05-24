@@ -6,6 +6,7 @@ import {
   getHighScoreFromLocalStorage,
 } from '../utils/localStorageUtils';
 import { generateDate, resetQuizResult } from '../utils/helpers';
+import { GeneralButton } from '../components/GeneralButton';
 
 interface ResultComponentProps {
   user: string;
@@ -63,30 +64,27 @@ export const Result = ({
             <h2 className="text-[#00C8B4]">{`Correct ${quizResult.correct}`}</h2>
             <h2 className="text-red-500">{`Wrong ${quizResult.wrong}`}</h2>
           </div>
-          <button
-            className="font-bold bg-[#00C8B4] rounded-md w-full py-2"
-            onClick={() => {
+          <GeneralButton
+            styling="font-bold bg-[#00C8B4] rounded-md w-full py-2"
+            onClickHandler={() => {
               onButtonHandler('play again');
             }}
-          >
-            Play Again
-          </button>
-          <button
-            className="font-bold bg-[#00C8B4] rounded-md w-full py-2"
-            onClick={() => {
+            buttonText="Play Again"
+          ></GeneralButton>
+          <GeneralButton
+            styling="font-bold bg-[#00C8B4] rounded-md w-full py-2"
+            onClickHandler={() => {
               onButtonHandler('see the answer');
             }}
-          >
-            See the Answer
-          </button>
-          <button
-            className="font-bold bg-[#00C8B4] rounded-md w-full py-2"
-            onClick={() => {
+            buttonText="See the Answer"
+          ></GeneralButton>
+          <GeneralButton
+            styling="font-bold bg-[#00C8B4] rounded-md w-full py-2"
+            onClickHandler={() => {
               onButtonHandler('main menu');
             }}
-          >
-            Go to Main Menu
-          </button>
+            buttonText="Go to Main Menu"
+          ></GeneralButton>
         </div>
       </div>
     </>
